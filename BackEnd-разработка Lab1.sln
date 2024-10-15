@@ -1,25 +1,27 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.8.34330.188
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEnd-разработка Lab1", "BackEnd-разработка Lab1\BackEnd-разработка Lab1.csproj", "{0AEE1BD2-509A-427B-AFD8-4ED98D90F243}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0AEE1BD2-509A-427B-AFD8-4ED98D90F243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0AEE1BD2-509A-427B-AFD8-4ED98D90F243}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0AEE1BD2-509A-427B-AFD8-4ED98D90F243}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0AEE1BD2-509A-427B-AFD8-4ED98D90F243}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E5CB8C5A-9B9A-425B-BEBB-4A73749EFA5B}
-	EndGlobalSection
-EndGlobal
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();
